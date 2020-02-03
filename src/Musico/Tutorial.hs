@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
-module Tutorial where
+module Musico.Tutorial where
 
 import           Text.Megaparsec                ( Parsec
                                                 , parseTest

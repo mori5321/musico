@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Tone
+module Musico.Tone
     ( parseTone
     , Note(..)
     , Accidental(..)
@@ -13,7 +13,7 @@ import           Text.Megaparsec                ( Parsec
                                                 )
 import           Text.Megaparsec.Char           ( string )
 import qualified Data.Text                     as T
-import           Parser                         ( Parser )
+import           Musico.Parser                         ( Parser )
 
 data Note = C | D | E | F | G | A | B  deriving (Eq, Show)
 data Accidental = Natural | Flat | Sharp deriving (Eq, Show)

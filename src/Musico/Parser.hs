@@ -1,4 +1,4 @@
-module Parser
+module Musico.Parser
     ( Parser
     )
 where

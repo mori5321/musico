@@ -1,6 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Chord
+-- TODO:
+-- DirecotyをMusico.Chordのように分ける。
+-- runParser, parseTestなどの関数をWrapして提供する
+
+module Musico.Chord
     ( parseChord
     )
 where
@@ -29,9 +33,8 @@ import qualified Data.Text                     as T
 import qualified Text.Megaparsec.Char.Lexer    as L
 import           Control.Applicative            ( (<|>) )
 
-
-import           Parser                         ( Parser )
-import           Tone                           ( parseTone
+import           Musico.Parser                         ( Parser )
+import           Musico.Tone                           ( parseTone
                                                 , Tone(..)
                                                 , Accidental(..)
                                                 , Note(..)
@@ -56,9 +59,6 @@ parseChord' = do
 
 parseChord :: Parser Chord
 parseChord = parseChord' <* eof
-
--- parseTest (parseChord <* eof) "Cmmmmm"
--- これでエラーを吐かせることができる
 
 parseQuality :: Parser Quality
 parseQuality = option Major $ choice
