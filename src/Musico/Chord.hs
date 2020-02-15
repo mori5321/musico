@@ -6,6 +6,8 @@
 
 module Musico.Chord
     ( parseChord
+    , Chord
+    , toTones
     )
 where
 
@@ -33,11 +35,13 @@ import qualified Data.Text                     as T
 import qualified Text.Megaparsec.Char.Lexer    as L
 import           Control.Applicative            ( (<|>) )
 
-import           Musico.Parser                         ( Parser )
-import           Musico.Tone                           ( parseTone
+import           Musico.Parser                  ( Parser )
+import           Musico.Tone                    ( parseTone
                                                 , Tone(..)
                                                 , Accidental(..)
                                                 , Note(..)
+                                                , toneToDegree
+                                                , degreeToTone
                                                 )
 
 data Quality = Major | Minor | Augment | Diminish deriving (Show, Eq)
@@ -75,3 +79,14 @@ parseSeventh :: Parser Seventh
 parseSeventh =
     option No7th $ choice [Major7th <$ string "M7", Minor7th <$ string "7"]
 
+toTones :: Chord -> [Tone]
+toTones chord = [rootTone, midTone, fifthTone, seventhTone]
+  where
+    rootTone    = root chord
+    midTone     = degreeToTone $ (+ 4) $ toneToDegree rootTone --Tmp
+    fifthTone   = degreeToTone $ (+ 7) $ toneToDegree rootTone --Tmp
+    seventhTone = degreeToTone $ (+ 11) $ toneToDegree rootTone --Tmp
+
+-- Example
+-- let chord = parse parseChord "Cm7"
+-- toTones <$> chord
